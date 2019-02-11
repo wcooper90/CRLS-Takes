@@ -1,0 +1,95 @@
+$color-green: #339933;
+
+%nice-text {
+  text-align:center;
+  font-size: 40px;
+}
+
+div{
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+}
+
+button.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+span.green {
+  color:$color-green;
+}
+
+img {
+  padding-bottom: 50px;
+}
+
+h1 {
+  @extend %nice-text;
+  text-align: center;
+  font-size: 80px;
+  display: inline-block;
+  font-family: "Times New Roman", Times, serif;
+}
+
+p.readableText {
+  @extend %nice-text;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+#necessaryId {
+  font-family: "Ariel", Times, serif;
+  color: $color-green;
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  width:100%
+}
+
+@media
+(min-width:768px) {
+  #necessaryId {
+    position: fixed;
+    left: 350px;
+  }
+}

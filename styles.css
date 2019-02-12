@@ -18,21 +18,24 @@ div.dropdown-content a {
   text-decoration: none;
   display: block; }
 div.dropdown:hover .dropbtn {
-  background-color: #3e8e41; }
+  background-color: #BA55D3; }
 div.dropdown:hover .dropdown-content {
   display: block; }
 div.dropdown-content a:hover {
   background-color: #ddd; }
 
 button.dropbtn {
-  background-color: #4CAF50;
+  background-color: #751AE8;
   color: white;
   padding: 16px;
   font-size: 16px;
   border: none; }
 
 span.green {
-  color: #339933; }
+  color: #751AE8; }
+
+span.silver {
+  color: #C9D0CE; }
 
 img {
   padding-bottom: 50px; }

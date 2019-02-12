@@ -1,4 +1,5 @@
 $color-green: #339933;
+$color-purple: #751AE8;
 
 %nice-text {
   text-align:center;
@@ -41,7 +42,7 @@ div{
 }
 
 button.dropbtn {
-  background-color: #4CAF50;
+  background-color: $color-purple;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -49,7 +50,7 @@ button.dropbtn {
 }
 
 span.green {
-  color:$color-green;
+  color:$color-purple;
 }
 
 img {

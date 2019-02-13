@@ -24,7 +24,7 @@ div.dropdown:hover .dropdown-content {
 div.dropdown-content a:hover {
   background-color: #ddd; }
 
-button.regbtn {
+button.dropbtn {
   background-color: #751AE8;
   color: white;
   padding: 16px;

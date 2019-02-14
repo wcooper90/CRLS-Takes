@@ -1,44 +1,8 @@
-$color-green: #339933;
 $color-purple: #751AE8;
 
 %nice-text {
   text-align:center;
   font-size: 40px;
-}
-
-div{
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-.dropdown:hover .dropbtn {
-    background-color:  #A569BD;
-  }
-
-.dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-  }
 }
 
 button.dropbtn {
@@ -49,7 +13,7 @@ button.dropbtn {
   border: none;
 }
 
-span.green {
+span.purple {
   color:$color-purple;
 }
 
@@ -79,21 +43,3 @@ p.readableText {
 
 span.silver {
   color: #C9D0CE; }
-
-
-#necessaryId {
-  font-family: "Ariel", Times, serif;
-  color: $color-green;
-  position: fixed;
-  bottom: 10px;
-  left: 20px;
-  width:100%
-}
-
-@media
-(min-width:768px) {
-  #necessaryId {
-    position: fixed;
-    left: 350px;
-  }
-}

@@ -14,44 +14,46 @@
     <body>
       <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-          <a class="navbar-brand" href="/">CRLS <span class="silver">TAKES</span></a>
-          <div class="dropdown">
-            <button class="dropbtn" href="/takesG">Takes</button>
-            <div class="dropdown-content">
-             <a href="/takesG">General</a>
-             <a href="/error">Freezing Cold</a>
-             <a href="/error">Cool</a>
-             <a href="/error">Lukewarm</a>
-             <a href="/error">Hot</a>
-             <a href="/error">Scalding</a>
+          <div class="container">
+            <a class="navbar-brand" href="/">CRLS <span class="silver">TAKES</span></a>
+            <div class="dropdown">
+              <button class="dropbtn" href="/takesG">Takes</button>
+              <div class="dropdown-content">
+               <a href="/takesG">General</a>
+               <a href="/error">Freezing Cold</a>
+               <a href="/error">Cool</a>
+               <a href="/error">Lukewarm</a>
+               <a href="/error">Hot</a>
+               <a href="/error">Scalding</a>
+              </div>
             </div>
-          </div>
-          <div class="dropdown">
-            <button class="dropbtn" href="/blogsG">Blogs</button>
-            <div class="dropdown-content">
-             <a href="/blogsG">General</a>
-             <a href="/error">Mass News</a>
-             <a href="/error">Pop</a>
-             <a href="/error">Sports</a>
-             <a href="/error">Featured</a>
-           </div>
-          </div>
-            <ul class="navbar-nav mr-auto mt-2">
-              <li class="nav-item"><a class="nav-link" href="/error">Write</a></li>
-              <li class="nav-item"><a class="nav-link" href="/error">My Profile</a></li>
-              <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <div class="dropdown">
+              <button class="dropbtn" href="/blogsG">Blogs</button>
+              <div class="dropdown-content">
+               <a href="/blogsG">General</a>
+               <a href="/error">Mass News</a>
+               <a href="/error">Pop</a>
+               <a href="/error">Sports</a>
+               <a href="/error">Featured</a>
+             </div>
+            </div>
+              <ul class="navbar-nav mr-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/error">Write</a></li>
+                <li class="nav-item"><a class="nav-link" href="/error">My Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+              </ul>
+            <ul class="navbar-nav ml-auto mt-2">
+              <li class="nav-item"><a class="nav-link" href="/error">Register</a></li>
+              <li class="nav-item"><a class="nav-link" href="/error">Log In</a></li>
             </ul>
-          <ul class="navbar-nav ml-auto mt-2">
-            <li class="nav-item"><a class="nav-link" href="/error">Register</a></li>
-            <li class="nav-item"><a class="nav-link" href="/error">Log In</a></li>
-          </ul>
+          </div>
         </nav>
       </header>
       <main>
             {% block main %}  {% endblock %}
       </main>
       <footer class="small text-center text-muted">
-            <a>Made by Will Cooper and Max Davis</a>
+            <a>Brought to you by Will Cooper and Max Davis</a><br />
       </footer>
     </body>
 </html>

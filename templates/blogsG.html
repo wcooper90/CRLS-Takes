@@ -10,43 +10,62 @@
     <h1>
       <span class="purple">BLOGS</span>
     </h1>
-    <p text="centered">
-      So I don't really know what role a table would play in the final CRLS Takes website, but for the time being,
-      here is a table filled with random values so that I can get a good grade for my Web Development class.
-    </p>
   </div>
   <div class="container">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Seed</th>
-            <th scope="col">Team</th>
-            <th scope="col">City</th>
-            <th scope="col">Degree of Goodness</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Partiots</td>
-            <td>New England (Boston)</td>
-            <td>Best in the world</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Packers</td>
-            <td>Green Bay</td>
-            <td>OK</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Rams</td>
-            <td>Los Angeles</td>
-            <td>Tbh idk but not as good as the Patriots</td>
-          </tr>
-        </tbody>
-      </table>
+    <button class="accordion">Mass News</button>
+    <div class="panel">
+     <p class="padded"> This is the "it be like that sometimes" section.
+       <br />
+       <button class="hubber">Do it be like that?</button>
+     </p>
     </div>
+
+    <button class="accordion">Sports</button>
+    <div class="panel">
+     <p class="padded">This is what you came for. (probably).
+       <br />
+       <button class="hubber">yayy</button>
+     </p>
+    </div>
+
+    <button class="accordion">Pop</button>
+    <div class="panel">
+     <p class="padded"> I think pop is short for population so click this button to
+       eliminate the population
+       <br />
+       <button class="hubber">Eliminate</button>
+     </p>
+    </div>
+
+    <button class="accordion">Featured</button>
+    <div class="panel">
+     <p class="padded">Newest and most interesting. Take a gander woodjya
+       <br />
+       <button class="hubber">Up & Away</button>
+     </p>
+    </div>
+
+    <br />
+    <p class="readableText">
+      These buttons don't really do anything yet. If you go to the  <a href="/about">about</a>
+      section, you can learn what these buttons will be used for in the near future.
+    </p>
+    <br />
   </div>
+  <script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight){
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  }
+  </script>
 {% endblock %}

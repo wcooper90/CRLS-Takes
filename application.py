@@ -22,3 +22,7 @@ def takesG():
 @app.route("/blogsG")
 def blogsG():
     return render_template("blogsG.html")
+
+@app.route("/write")
+def write():
+    return render_template("writeN.html")

@@ -30,3 +30,7 @@ def write():
 @app.route("/scalding")
 def scalding():
     return render_template("scalding.html")
+
+@app.route("/popblogs")
+def popblogs():
+    return render_template("popblogs.html")

@@ -1,0 +1,7 @@
+Connect Database for users, posts(blogs, takes, comments), connect database for
+upvotes/take votes.
+
+Make create account page, profile, and write page.
+
+Featured pages for takes and blogs -- format, then connect to databases through dynamic
+python (application.py)

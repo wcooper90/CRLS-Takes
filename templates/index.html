@@ -13,6 +13,54 @@
             Because the Register Forum sucks and you deserve better. You're welcome.
           </p>
         </div>
+        <button class="accordion">Why CRLS Takes</button>
+        <div class="panel">
+         <p class="padded">Don't even bother
+           <br />
+           <button class="hubber">Take me pls tho</button>
+         </p>
+        </div>
+
+        <button class="accordion">Takes</button>
+        <div class="panel">
+         <p class="padded">People generally don't agree but O.K.
+           <br />
+           <button class="hubber">Take me pls</button>
+         </p>
+        </div>
+
+        <button class="accordion">Blogs</button>
+        <div class="panel">
+         <p class="padded">Meh
+           <br />
+           <button class="hubber">Take me</button>
+         </p>
+        </div>
+
+        <button class="accordion">Getting Started with an Account</button>
+        <div class="panel">
+         <p class="padded">This shit hot. Be careful my guy.
+           <br />
+           <button class="hubber">Take me pls</button>
+         </p>
+        </div>
+        <br />
         <img class="shake" src="/static/CRLS1.jpg" alt="Image of CRLS" style="width:1100px;height:850px;" />
       </div>
+      <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+      </script>
 {% endblock %}

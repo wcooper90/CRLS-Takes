@@ -26,3 +26,7 @@ def blogsG():
 @app.route("/write")
 def write():
     return render_template("writeN.html")
+
+@app.route("/scalding")
+def scalding():
+    return render_template("scalding.html")

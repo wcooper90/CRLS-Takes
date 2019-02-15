@@ -159,3 +159,20 @@ img.shake:hover {
 .padded {
   padding-top: 10px;
 }
+
+.pill {
+  background-color: #751AE8;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.pill:hover {opacity: 1}

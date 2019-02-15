@@ -5,54 +5,14 @@
 {% block main %}
   <div class="container">
     <br />
-    <br />
-    <br />
-    <h1>
+    <button class="pill">Freezing Cold</button>
+    <button class="pill">Cool</button>
+    <button class="pill">Lukewarm</button>
+    <button class="pill">Hot</button>
+    <button class="pill">Scalding</button>
+    <h1 class="center">
       <span class="purple">TAKES</span>
     </h1>
-  </div>
-  <div class="container">
-
-    <button class="accordion">Freezing Cold</button>
-    <div class="panel">
-     <p class="padded">Don't even bother
-       <br />
-       <button class="hubber">Take me pls tho</button>
-     </p>
-    </div>
-
-    <button class="accordion">Cool</button>
-    <div class="panel">
-     <p class="padded">People generally don't agree but O.K.
-       <br />
-       <button class="hubber">Take me pls</button>
-     </p>
-    </div>
-
-    <button class="accordion">Lukewarm</button>
-    <div class="panel">
-     <p class="padded">Meh
-       <br />
-       <button class="hubber">Take me</button>
-     </p>
-    </div>
-
-    <button class="accordion">Hot</button>
-    <div class="panel">
-     <p class="padded">This shit hot. Be careful my guy.
-       <br />
-       <button class="hubber">Take me pls</button>
-     </p>
-    </div>
-
-    <button class="accordion">Scalding</button>
-    <div class="panel">
-     <p class="padded">Don't even bother
-       <br />
-       <button class="hubber">Take me pls tho</button>
-     </p>
-     </div>
-
     <br />
     <p class="readableText">
       These buttons don't really do anything yet. If you go to the  <a href="/about">about</a>
@@ -60,20 +20,4 @@
     </p>
     <br />
   </div>
-  <script>
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight){
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    });
-  }
-  </script>
 {% endblock %}

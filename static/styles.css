@@ -141,3 +141,21 @@ img.shake:hover {
 .active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
+.hubber {
+  background-color: #751AE8;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.hubber:hover {opacity: 1}
+
+.padded {
+  padding-top: 10px;
+}

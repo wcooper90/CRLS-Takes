@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<br />
+  <div class="container">
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input class="form-control" name="username" placeholder="Username" id="username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" id="password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Repeat Password"  id="confirmation" type="password">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+  </div>
+
+    <script>
+        document.querySelector('form').onsubmit = function() {
+            if (!document.querySelector('username').value) {
+                alert('Please enter new username');
+                return false;
+            }
+            else if (!document.querySelector('password').value) {
+                alert('Please enter new password');
+                return false;
+            }
+            else if (!document.querySelector('confirmation').value) {
+                alert('Please confirm password');
+                return false;
+            }
+            return true;
+        };
+
+    </script>
+{% endblock %}

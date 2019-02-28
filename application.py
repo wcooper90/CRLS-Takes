@@ -99,11 +99,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("Just put in the damn username, you fool!", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("Just put in the damn password, you fool!", 403)
 
         username = request.form.get("username")
         print(username)

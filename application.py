@@ -5,14 +5,14 @@ import datetime
 import os
 import csv
 
-from psycopg2.extensions import AsIs
 from tempfile import mkdtemp
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-DATABASE_URL = "postgres://ijszjvjbdhkmsb:e8f64406c77896ab475c2f73fe8e5e3f187e7251e4e7c99c69c59bc5c1b284e6@ec2-107-20-185-27.compute-1.amazonaws.com:5432/d29knmrbpdbcoc"
+DATABASE_URL = "postgres://cnfjlelhbsbqdj:43a55fcedde5bbb4f27c30a1a384f18f76600704afaf42ef9d6f07dce82d0b9c@ec2-54-235-134-25.compute-1.amazonaws.com:5432/d3gbkv3egf6krp"
 engine = create_engine(DATABASE_URL)
 db = scoped_session(sessionmaker(bind=engine))
+
 try:
     # suppose the database has been restarted.
     db.execute("SELECT * FROM users")
@@ -50,6 +50,9 @@ def blogsG():
 
 @app.route("/write")
 def write():
+
+
+
     return render_template("writeN.html")
 
 @app.route("/scalding")
@@ -79,7 +82,7 @@ def register():
         print(username)
 
         # registers user into database and logs them in
-        db.execute("INSERT INTO users (username, password) VALUES(?, ?)", username, password)
+        db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", {"username": request.form.get("username"), "hash": request.form.get("password")})
         # change this later
         db.commit()
         return render_template("login.html")
@@ -109,7 +112,7 @@ def login():
         print(username)
 
         # Query database for username
-
+        rows = db.execute("SELECT * FROM users WHERE username = (:username)", {"username": request.form.get("username")})
         print(db.execute("""SELECT * FROM users WHERE username = :username""", username=username))
         # Ensure username exists and password is correct
         if len(rows) != 1 or not request.form.get("password"):

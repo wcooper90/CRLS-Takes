@@ -25,7 +25,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # connects with heroku database and creates db
-engine = create_engine("postgres://vyjriqcfosqnur:9c6b3c8af531dbebbc40b5ae29de21de9f3594a7881d2ab6d9abd8b601935292@ec2-50-19-208-11.compute-1.amazonaws.com:5432/d3ohod6vp2pg5a", pool_size=50)
+engine = create_engine("postgres://cnfjlelhbsbqdj:43a55fcedde5bbb4f27c30a1a384f18f76600704afaf42ef9d6f07dce82d0b9c@ec2-54-235-134-25.compute-1.amazonaws.com:5432/d3gbkv3egf6krp", pool_size=50)
 db = scoped_session(sessionmaker(bind=engine))
 
 # about page route
@@ -144,10 +144,10 @@ def search():
 def profile():
     # collects from database the user's username and the reviews they have made
     username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    reviews = db.execute("SELECT * FROM reviews WHERE username = (:user)", {"user": username}).fetchall()
+    blogs = db.execute("SELECT * FROM blogs WHERE username = (:user)", {"user": username}).fetchall()
     posts = db.execute("SELECT posts FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
     dateJoined = db.execute("SELECT dateJoined FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    return render_template("profile.html", username=username, reviews=reviews, posts=posts, dateJoined=dateJoined)
+    return render_template("profile.html", username=username, blogs=blogs, posts=posts, dateJoined=dateJoined)
 
 
 # API route

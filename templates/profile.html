@@ -23,21 +23,19 @@
           <thead>
             <tr>
               <th scope="col">Title</th>
-              <th scope="col">isbn</th>
-              <th scope="col">Review</th>
-              <th scope="col">Rating</th>
-              <th scope="col">Book Page</th>
+              <th scope="col">Blog</th>
+              <th scope="col">Date Posted</th>
+              <th scope="col">Blog Page</th>
             </tr>
           </thead>
           <tbody>
             {% for blog in blogs %}
                 <tr>
-                  <td>{{ blog[1] }}</td>
-                  <td>{{ blog[0] }}</td>
-                  <td>{{ blog[2] }}</td>
                   <td>{{ blog[4] }}</td>
-                  <td><button onclick="location.href='/books/{{ blog[0] }}'" type="button" class="hubber">
-                    {{ blog[1] }}</button></td>
+                  <td>{{ blog[0] }}</td>
+                  <td>{{ blog[3] }}</td>
+                  <td><button onclick="location.href='/blogs/{{ blog[1] }}'" type="button" class="hubber">
+                    {{ blog[4] }}</button></td>
                 </tr>
             {% endfor %}
           </tbody>

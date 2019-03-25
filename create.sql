@@ -15,6 +15,8 @@ CREATE TABLE takes (
 
 CREATE TABLE blogs (
   blog VARCHAR NOT NULL,
+  id SERIAL PRIMARY KEY,
   username VARCHAR NOT NULL,
-  datePosted DATE
+  datePosted DATE,
+  bName VARCHAR NOT NULL
 );

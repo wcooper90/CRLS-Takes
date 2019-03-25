@@ -1,73 +1,45 @@
 {% extends "layout.html" %}
 
-{% block heading %} About {% endblock %}
+{% block heading %} Index {% endblock %}
 
 {% block main %}
-  <div class="container">
-    <br />
-    <br />
-    <br />
-    <h1>
-      CRLS <span class="purple">TAKES</span><br />
-      Welcome, {{ username }}
-    </h1>
-    <p class="readableText">
-      CRLS Takes is an attempt by a CRLS student to replace the sports section of
-      Register Forum (the high school newspaper). This blogsite will include a variety of fucntions
-      which will make it easier for students to share opinions and articles on everything
-      sports-related, both within the school and for other sports organizations.
-    </p>
-    <p class="readableText">
-      For the time being, many of the links you see do not do anything. In the future,
-      we'd like for there to be two main functions for CRLS Takes -- Takes and Blogs.
-      Blogs are your typical opinionated/unopinionated articles, whereas Takes are only a
-      sentence or two. Once we have a dynamic website which allows users to register for accounts
-      and to write Takes and Blogs, users can vote on Takes (five options: Freezing Cold, Cool,
-      Lukewarm, Hot, and Scalding). The Takes can be found through the dropdown menu in the
-      navigation bar, and each take can have a comment section and a link to a connected Blog.
-    </p>
-    <p class="readableText">
-      Hopefully that wasn't too difficult to follow. If it was, hopefully future updates to
-      website will clear things up.
-    </p>
-    <div class="row">
-     <div class="column">
-       <div class="card">
-         <img src="/static/Will.jpg" alt="Will" style="width:100%">
-         <div class="cont4iner">
-           <h2>Will Cooper</h2>
-           <p class="title">CEO &amp; Founder</p>
-           <p>Wavy</p>
-           <p>example@example.com</p>
-           <p><button class="aboutMe">Contact</button></p>
-         </div>
-       </div>
-     </div>
-     <div class="column">
-       <div class="card">
-         <img src="/static/Max.jpg" alt="Max" style="width:100%">
-         <div class="cont4iner">
-           <h2>Max Davis</h2>
-           <p class="title">Art Director</p>
-           <p>Tight</p>
-           <p>example@example.com</p>
-           <p><button class="aboutMe">Contact</button></p>
-         </div>
-       </div>
-     </div>
-     <div class="column">
-       <div class="card">
-         <img src="/static/Albert.jpg" alt="Albert" style="width:100%" />
-         <div class="cont4iner">
-           <h2>Albert Liu</h2>
-           <p class="title">Poo Poo</p>
-           <p>Wack</p>
-           <p>example@example.com</p>
-           <p><button class="aboutMe">Contact</button></p>
-         </div>
-       </div>
-     </div>
-    </div>
-    <img src="/static/CRLS2.jpg" alt="Image of CRLS" height=500>
-  </div>
+      <br />
+      <div class="container">
+        <div class="jumbotron">
+          <h1>
+            Welcome, <span class="purple">{{ username }}</span> <img class="shake" src="/static/logo.ico" alt="Logo" style="width:200px;height:200px;" />
+          </h1>
+          <p>
+            Date Joined: {{ dateJoined }} <br />
+            Number of Blogs Submitted: {{ posts }}
+          </p>
+        </div>
+        <div class="container h-100">
+        </div>
+        <h3>
+          YOUR BLOGS
+        </h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Blog</th>
+              <th scope="col">Date Posted</th>
+              <th scope="col">Blog Page</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for blog in blogs %}
+                <tr>
+                  <td>{{ blog[4] }}</td>
+                  <td>{{ blog[0] }}</td>
+                  <td>{{ blog[3] }}</td>
+                  <td><button onclick="location.href='/blogs/{{ blog[1] }}'" type="button" class="hubber">
+                    {{ blog[4] }}</button></td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
 {% endblock %}

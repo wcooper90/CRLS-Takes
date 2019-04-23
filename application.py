@@ -216,3 +216,18 @@ def books(isbn):
         return render_template("books.html", isbn=isbn, info=info[0], reviews=reviews, avgRate=avgRate, numG=numG, link=link)
     else:
         return render_template("books.html", isbn=isbn, info=info[0], reviews=reviews, avgRate=avgRate, numG=numG, link=link)
+
+
+# profile page route
+@app.route("/write", methods=["GET", "POST"])
+def write():
+    if request.method == "POST":
+        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
+        blog = request.form.get("blog")
+        blogN = request.form.get("name")
+        date = datetime.datetime.now()
+        db.execute("INSERT INTO blogs (blog, username, date, bname) VALUES(:blog, :username, :date, :bname)",
+                    {'blog': blog, 'username': username, 'date':date, 'bname': blogN})
+        return render_template("profile.html")
+    else:
+        return render_template("write.html")

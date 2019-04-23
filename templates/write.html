@@ -3,8 +3,16 @@
 {% block heading %} Write {% endblock %}
 
 {% block main %}
-  <div>
-    nothing yet, but if signed in, will allow user to write a take to the main pages
-    to be voted on.
+  <div class="container">
+    <form action="/write" method="post">
+      <div class="form-group">
+          <input class="form-control" name="blogN" placeholder="Title of Blog... " id="blogN" type="text">
+      </div>
+        <div class="form-group">
+            <input class="form-control" name="blog" placeholder="Write About..." id="blog" type="text">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
   </div>
 {% endblock %}

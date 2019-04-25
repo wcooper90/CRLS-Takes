@@ -233,24 +233,15 @@ def write():
         return render_template("write.html")
 
 
-@app.route("/writeB", methods=["GET", "POST"])
+@app.route("/writeT", methods=["GET", "POST"])
 def writeT():
     if request.method == "POST":
-        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-        blog = request.form.get("blog")
-        bname = request.form.get("blogN")
-        date = datetime.datetime.now()
-        db.execute("INSERT INTO blogs (blog, username, dateposted, bname) VALUES(:blog, :username, :date, :bname)",
-                    {'blog': blog, 'username': username, 'date':date, 'bname': bname})
-        db.execute("UPDATE users SET posts=posts+1")
-        db.commit()
         return redirect("/profile")
     else:
-        return render_template("writeB.html")
+        return render_template("writeT.html")
 
 
-
-@app.route("/writeT", methods=["GET", "POST"])
+@app.route("/writeB", methods=["GET", "POST"])
 def writeB():
     if request.method == "POST":
         username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
@@ -259,8 +250,8 @@ def writeB():
         date = datetime.datetime.now()
         db.execute("INSERT INTO blogs (blog, username, dateposted, bname) VALUES(:blog, :username, :date, :bname)",
                     {'blog': blog, 'username': username, 'date':date, 'bname': bname})
-        db.execute("UPDATE users SET posts=posts+1")
+        db.execute("UPDATE users SET posts=posts+1 WHERE id = (:id)", {"id": session["user_id"]})
         db.commit()
         return redirect("/profile")
     else:
-        return render_template("writeT.html")
+        return render_template("writeB.html")

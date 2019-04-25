@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block heading %} Write {% endblock %}
+
+{% block main %}
+  <div class="container">
+    <br />
+    <form action="/write" method="post">
+      <div class="form-group">
+          <input class="form-control" name="blogN" placeholder="Title... " id="blogN" type="text">
+      </div>
+        <div class="form-group">
+            <input class="form-control" name="blog" placeholder="Write About..." id="blog" type="text">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+{% endblock %}

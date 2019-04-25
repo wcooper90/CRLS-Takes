@@ -40,6 +40,15 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/takesG")
+def takesG():
+    return render_template("takesG.html")
+
+@app.route("/blogsG")
+def blogsG():
+    return render_template("blogsG.html")
+
+
 # error page route
 @app.route("/error")
 def error():
@@ -144,10 +153,10 @@ def search():
 def profile():
     # collects from database the user's username and the reviews they have made
     username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    #blogs = db.execute("SELECT * FROM blogs WHERE username = (:user)", {"user": username}).fetchall()
+    blogs = db.execute("SELECT * FROM blogs WHERE username = (:user)", {"user": username}).fetchall()
     posts = db.execute("SELECT posts FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
     dateJoined = db.execute("SELECT dateJoined FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    return render_template("profile.html", username=username, posts=posts, dateJoined=dateJoined)
+    return render_template("profile.html", username=username, posts=posts, dateJoined=dateJoined, blogs=blogs)
 
 
 # API route
@@ -181,15 +190,9 @@ def api(isbn):
 
 
 # books page route
-@app.route("/books/<isbn>", methods=["GET", "POST"])
-def books(isbn):
-    # collects Goodreads data
-    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "4KXza8dotA2GKdo8w9DWmw", "isbns": isbn})
-    # makes sure Goodreads data exists
-    if res.status_code != 200:
-        raise Exception("ERROR: API request unsuccessful.")
-    # data to be displayed on top of webpage for the individual book
-    data = res.json()["books"]
+@app.route("/blogs/<num>", methods=["GET", "POST"])
+def blogs(num):
+
     avgRate = data[0]["average_rating"]
     numG = data[0]["ratings_count"]
     info = db.execute("SELECT * FROM books WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()
@@ -215,19 +218,49 @@ def books(isbn):
         reviews = db.execute("SELECT * FROM reviews WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()
         return render_template("books.html", isbn=isbn, info=info[0], reviews=reviews, avgRate=avgRate, numG=numG, link=link)
     else:
-        return render_template("books.html", isbn=isbn, info=info[0], reviews=reviews, avgRate=avgRate, numG=numG, link=link)
+        return render_template("blogs.html", title=title, blog=blog)
 
 
 # profile page route
 @app.route("/write", methods=["GET", "POST"])
 def write():
     if request.method == "POST":
-        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-        blog = request.form.get("blog")
-        blogN = request.form.get("name")
-        date = datetime.datetime.now()
-        db.execute("INSERT INTO blogs (blog, username, date, bname) VALUES(:blog, :username, :date, :bname)",
-                    {'blog': blog, 'username': username, 'date':date, 'bname': blogN})
-        return render_template("profile.html")
+        if request.form.get("type") == "blog":
+            return redirect("/writeB")
+        else:
+            return redirect("/writeT")
     else:
         return render_template("write.html")
+
+
+@app.route("/writeB", methods=["GET", "POST"])
+def writeT():
+    if request.method == "POST":
+        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
+        blog = request.form.get("blog")
+        bname = request.form.get("blogN")
+        date = datetime.datetime.now()
+        db.execute("INSERT INTO blogs (blog, username, dateposted, bname) VALUES(:blog, :username, :date, :bname)",
+                    {'blog': blog, 'username': username, 'date':date, 'bname': bname})
+        db.execute("UPDATE users SET posts=posts+1")
+        db.commit()
+        return redirect("/profile")
+    else:
+        return render_template("writeB.html")
+
+
+
+@app.route("/writeT", methods=["GET", "POST"])
+def writeB():
+    if request.method == "POST":
+        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
+        blog = request.form.get("blog")
+        bname = request.form.get("blogN")
+        date = datetime.datetime.now()
+        db.execute("INSERT INTO blogs (blog, username, dateposted, bname) VALUES(:blog, :username, :date, :bname)",
+                    {'blog': blog, 'username': username, 'date':date, 'bname': bname})
+        db.execute("UPDATE users SET posts=posts+1")
+        db.commit()
+        return redirect("/profile")
+    else:
+        return render_template("writeT.html")

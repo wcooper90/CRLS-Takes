@@ -19,4 +19,5 @@ CREATE TABLE blogs (
   username VARCHAR NOT NULL,
   datePosted DATE,
   bName VARCHAR NOT NULL
+  typeB VARCHAR NOT NULL
 );

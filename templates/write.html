@@ -6,8 +6,14 @@
   <div class="container">
     <br />
     <form action="/write" method="post">
-      <input type="radio" name="type" value="take"> Take<br>
-      <input type="radio" name="type" value="blog"> Blog<br>
+      <label class="contain">Take
+        <input type="radio" name="type" value="take">
+        <span class="checkmark"></span>
+      </label>
+      <label class="contain">Blog
+        <input type="radio" name="type" value="blog">
+        <span class="checkmark"></span>
+      </label>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
   </div>

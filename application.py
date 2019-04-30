@@ -190,35 +190,12 @@ def api(isbn):
 
 
 # books page route
-@app.route("/blogs/<num>", methods=["GET", "POST"])
+@app.route("/blogs/<num>", methods=["GET"])
 def blogs(num):
 
-    avgRate = data[0]["average_rating"]
-    numG = data[0]["ratings_count"]
-    info = db.execute("SELECT * FROM books WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()
-    reviews = db.execute("SELECT * FROM reviews WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()
-    link = "http://127.0.0.1:5000/api/" + isbn
-
-    if request.method == "POST":
-        # checks to make sure user has not already submitted a review for the book
-        user = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-        reviewed = db.execute("SELECT review FROM reviews WHERE username = (:username) AND isbn = (:isbn)", {"username":user, "isbn": isbn}).fetchall()
-        if reviewed:
-            return render_template("error.html", message="You have already submitted a review for this book")
-        # collects required data from html page and puts them in the reviews database
-        review = request.form.get("review")
-        rating = request.form.get("rating")
-        title = db.execute("SELECT title FROM books WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()[0][0]
-        db.execute("INSERT INTO reviews (isbn, title, username, rating, review) VALUES(:isbn, :title, :user, :rating, :review)",
-                    {"isbn": isbn, "title": title, "user": user, "rating": rating, "review": review})
-        posts = db.execute("SELECT posts FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-        db.execute("UPDATE users SET posts=posts+1")
-        db.commit()
-        # returns page with new review on it
-        reviews = db.execute("SELECT * FROM reviews WHERE isbn = (:isbn)", {"isbn": isbn}).fetchall()
-        return render_template("books.html", isbn=isbn, info=info[0], reviews=reviews, avgRate=avgRate, numG=numG, link=link)
-    else:
-        return render_template("blogs.html", title=title, blog=blog)
+    title = db.execute("SELECT bName FROM blogs WHERE id = (:id)", {"id": num}).fetchall()[0][0]
+    blog = db.execute("SELECT blog FROM blogs WHERE id = (:id)", {"id": num}).fetchall()[0][0]
+    return render_template("blogs.html", title=title, blog=blog)
 
 
 # profile page route
@@ -255,3 +232,8 @@ def writeB():
         return redirect("/profile")
     else:
         return render_template("writeB.html")
+
+
+@app.route("/massnews", methods=["GET"])
+def massnews():
+    return render_template("massnewsblogs.html")

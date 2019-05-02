@@ -9,7 +9,9 @@ CREATE TABLE users (
 CREATE TABLE takes (
   take VARCHAR NOT NULL,
   username VARCHAR NOT NULL,
-  datePosted DATE
+  datePosted DATE,
+  id SERIAL PRIMARY KEY,
+  rating INTEGER DEFAULT 3
 );
 
 

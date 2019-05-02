@@ -42,7 +42,8 @@ def index():
 
 @app.route("/takesG")
 def takesG():
-    return render_template("takesG.html")
+    takes = db.execute("SELECT * FROM takes")
+    return render_template("takesG.html", takes=takes)
 
 @app.route("/blogsG")
 def blogsG():
@@ -214,6 +215,13 @@ def write():
 @app.route("/writeT", methods=["GET", "POST"])
 def writeT():
     if request.method == "POST":
+        take = request.form.get("take")
+        print(take)
+        dateposted = datetime.datetime.now()
+        username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
+        db.execute("INSERT INTO takes (take, username, dateposted) VALUES(:take, :username, :dateposted)",
+                    {'take': take, 'username': username, 'dateposted':dateposted})
+        db.commit()
         return redirect("/profile")
     else:
         return render_template("writeT.html")
@@ -236,7 +244,56 @@ def writeB():
         return render_template("writeB.html")
 
 
-@app.route("/massnews", methods=["GET"])
-def massnews():
+@app.route("/bm", methods=["GET"])
+def bm():
     blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Mass News"})
-    return render_template("massnewsblogs.html", blogs=blogs)
+    return render_template("blogsDisplay.html", blogs=blogs, type="Mass News")
+
+@app.route("/bp", methods=["GET"])
+def bp():
+    blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Pop"})
+    return render_template("blogsDisplay.html", blogs=blogs, type="Pop")
+
+@app.route("/bs", methods=["GET"])
+def bs():
+    blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Sports"})
+    return render_template("blogsDisplay.html", blogs=blogs, type="Sports")
+
+@app.route("/bf", methods=["GET"])
+def bf():
+    blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Featured"})
+    return render_template("blogsDisplay.html", blogs=blogs, type="Featured")
+
+
+@app.route("/takes/<num>", methods=["GET"])
+def takes(num):
+    stuff = db.execute("SELECT * FROM takes WHERE id = (:id)", {"id": num}).fetchall()[0]
+    author = stuff[1]
+    take = stuff[0]
+    print(take)
+    return render_template("takes.html", take=take, author=author)
+
+@app.route("/tfc", methods=["GET"])
+def tfc():
+    takes = db.execute("SELECT * FROM takes WHERE rating = (:rating)", {"rating": 1})
+    return render_template("takesDisplay.html", takes=takes, type="Freezing Cold")
+
+@app.route("/tc", methods=["GET"])
+def tc():
+    takes = db.execute("SELECT * FROM takes WHERE rating = (:rating)", {"rating": 2})
+    return render_template("takesDisplay.html", takes=takes, type="Cool")
+
+@app.route("/tl", methods=["GET"])
+def tl():
+    takes = db.execute("SELECT * FROM takes WHERE rating = (:rating)", {"rating": 3})
+    return render_template("takesDisplay.html", takes=takes, type="Lukewarm")
+
+@app.route("/th", methods=["GET"])
+def th():
+    takes = db.execute("SELECT * FROM takes WHERE rating = (:rating)", {"rating": 4})
+    return render_template("takesDisplay.html", takes=takes, type="Hot")
+
+@app.route("/ts", methods=["GET"])
+def ts():
+    takes = db.execute("SELECT * FROM takes WHERE rating = (:rating)", {"rating": 5})
+    return render_template("takesDisplay.html", takes=takes, type="Scalding")

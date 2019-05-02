@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block heading %} Takes {% endblock %}
+
+{% block main %}
+  <div class="container">
+    <br />
+    <h1>
+      <span class="purple">{{ take }}</span>
+    </h1>
+    <h3>
+        Author: {{ author }}
+    </h3>
+    <br />
+      <form action="/takes" method="post">
+        <button class="pill">Freezing Cold</button>
+        <button class="pill">Cool</button>
+        <button class="pill">Lukewarm</button>
+        <button class="pill">Hot</button>
+        <button class="pill">Scalding</button>
+      </form>
+  </div>
+{% endblock %}

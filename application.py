@@ -265,13 +265,18 @@ def bf():
     return render_template("blogsDisplay.html", blogs=blogs, type="Featured")
 
 
-@app.route("/takes/<num>", methods=["GET"])
+@app.route("/takes/<num>", methods=["GET", "POST"])
 def takes(num):
-    stuff = db.execute("SELECT * FROM takes WHERE id = (:id)", {"id": num}).fetchall()[0]
-    author = stuff[1]
-    take = stuff[0]
-    print(take)
-    return render_template("takes.html", take=take, author=author)
+    if request.method == "POST":
+        add = request.form.get("rate")
+        db.execute("UPDATE takes SET rating=rating+(:add) WHERE id = (:id)", {"id": num, "add":add})
+        db.commit()
+        return redirect("/takesG")
+    else:
+        stuff = db.execute("SELECT * FROM takes WHERE id = (:id)", {"id": num}).fetchall()[0]
+        author = stuff[1]
+        take = stuff[0]
+        return render_template("takes.html", take=take, author=author, num=num)
 
 @app.route("/tfc", methods=["GET"])
 def tfc():

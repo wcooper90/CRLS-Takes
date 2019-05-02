@@ -12,12 +12,28 @@
         Author: {{ author }}
     </h3>
     <br />
-      <form action="/takes" method="post">
-        <button class="pill">Freezing Cold</button>
-        <button class="pill">Cool</button>
-        <button class="pill">Lukewarm</button>
-        <button class="pill">Hot</button>
-        <button class="pill">Scalding</button>
+      <form action="/takes/{{ num }}" method="post">
+        <label class="contain">Freezing Cold
+          <input type="radio" name="rate" value="-2">
+          <span class="checkmark"></span>
+        </label>
+        <label class="contain">Cool
+          <input type="radio" name="rate" value="-1">
+          <span class="checkmark"></span>
+        </label>
+        <label class="contain">Lukewarm
+          <input type="radio" name="rate" value="0">
+          <span class="checkmark"></span>
+        </label>
+        <label class="contain">Hot
+          <input type="radio" name="rate" value="1">
+          <span class="checkmark"></span>
+        </label>
+        <label class="contain">Scalding
+          <input type="radio" name="rate" value="2">
+          <span class="checkmark"></span>
+        </label>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
   </div>
 {% endblock %}

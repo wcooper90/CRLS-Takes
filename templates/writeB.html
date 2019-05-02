@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block heading %} Write {% endblock %}
+
+{% block main %}
+  <div class="container">
+    <br />
+    <form action="/writeB" method="post">
+      <label class="contain">Pop
+        <input type="radio" name="type" value="Pop">
+        <span class="checkmark"></span>
+      </label>
+      <label class="contain">General
+        <input type="radio" name="type" value="General">
+        <span class="checkmark"></span>
+      </label>
+      <label class="contain">Mass News
+        <input type="radio" name="type" value="Mass News">
+        <span class="checkmark"></span>
+      </label>
+      <label class="contain">Sports
+        <input type="radio" name="type" value="Sports">
+        <span class="checkmark"></span>
+      </label>
+      <div class="form-group">
+          <input class="form-control" name="blogN" placeholder="Title... " id="blogN" type="text">
+      </div>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Write About..." id="blog" type="text" name="blog" style="width:1110px;height:150px;"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+{% endblock %}

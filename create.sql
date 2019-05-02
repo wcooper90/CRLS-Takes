@@ -21,3 +21,15 @@ CREATE TABLE blogs (
   bName VARCHAR NOT NULL
   typeB VARCHAR NOT NULL
 );
+
+Stuff to connect to adminer --
+Host
+    ec2-54-235-134-25.compute-1.amazonaws.com
+Database
+    d3gbkv3egf6krp
+User
+    cnfjlelhbsbqdj
+Port
+    5432
+Password
+    43a55fcedde5bbb4f27c30a1a384f18f76600704afaf42ef9d6f07dce82d0b9c

@@ -4,15 +4,18 @@
 
 {% block main %}
   <div class="container">
-    <div class="readableText">
-      Mass News
-    </div>
+    <br />
+    <div class="jumbotron">
+      <h1>
+        MASS <span class="purple">NEWS</span>
+      </h1>
+      </div>
     <br />
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Title</th>
-          <th scope="col">Username</th>
+          <th scope="col">Author</th>
           <th scope="col">Date Posted</th>
           <th scope="col">Blog Page</th>
         </tr>
@@ -21,7 +24,7 @@
         {% for blog in blogs %}
             <tr>
               <td>{{ blog[4] }}</td>
-              <td>{{ blog[0] }}</td>
+              <td>{{ blog[2] }}</td>
               <td>{{ blog[3] }}</td>
               <td><button onclick="location.href='/blogs/{{ blog[1] }}'" type="button" class="hubber">
                 {{ blog[4] }}</button></td>

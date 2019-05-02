@@ -192,10 +192,11 @@ def api(isbn):
 # books page route
 @app.route("/blogs/<num>", methods=["GET"])
 def blogs(num):
-
-    title = db.execute("SELECT bName FROM blogs WHERE id = (:id)", {"id": num}).fetchall()[0][0]
-    blog = db.execute("SELECT blog FROM blogs WHERE id = (:id)", {"id": num}).fetchall()[0][0]
-    return render_template("blogs.html", title=title, blog=blog)
+    stuff = db.execute("SELECT * FROM blogs WHERE id = (:id)", {"id": num}).fetchall()[0]
+    author = stuff[2]
+    title = stuff[4]
+    blog = stuff[0]
+    return render_template("blogs.html", title=title, blog=blog, author=author)
 
 
 # profile page route
@@ -225,8 +226,9 @@ def writeB():
         blog = request.form.get("blog")
         bname = request.form.get("blogN")
         date = datetime.datetime.now()
-        db.execute("INSERT INTO blogs (blog, username, dateposted, bname) VALUES(:blog, :username, :date, :bname)",
-                    {'blog': blog, 'username': username, 'date':date, 'bname': bname})
+        bType = request.form.get("type")
+        db.execute("INSERT INTO blogs (blog, username, dateposted, bname, typeb) VALUES(:blog, :username, :date, :bname, :typeb)",
+                    {'blog': blog, 'username': username, 'date':date, 'bname': bname, 'typeb': bType})
         db.execute("UPDATE users SET posts=posts+1 WHERE id = (:id)", {"id": session["user_id"]})
         db.commit()
         return redirect("/profile")
@@ -236,4 +238,5 @@ def writeB():
 
 @app.route("/massnews", methods=["GET"])
 def massnews():
-    return render_template("massnewsblogs.html")
+    blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Mass News"})
+    return render_template("massnewsblogs.html", blogs=blogs)

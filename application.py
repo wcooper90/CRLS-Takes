@@ -144,10 +144,10 @@ def search():
 def profile():
     # collects from database the user's username and the reviews they have made
     username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    blogs = db.execute("SELECT * FROM blogs WHERE username = (:user)", {"user": username}).fetchall()
+    #blogs = db.execute("SELECT * FROM blogs WHERE username = (:user)", {"user": username}).fetchall()
     posts = db.execute("SELECT posts FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
     dateJoined = db.execute("SELECT dateJoined FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-    return render_template("profile.html", username=username, blogs=blogs, posts=posts, dateJoined=dateJoined)
+    return render_template("profile.html", username=username, posts=posts, dateJoined=dateJoined)
 
 
 # API route

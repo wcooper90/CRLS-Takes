@@ -216,11 +216,10 @@ def write():
 def writeT():
     if request.method == "POST":
         take = request.form.get("take")
-        print(take)
         dateposted = datetime.datetime.now()
         username = db.execute("SELECT username FROM users WHERE id = (:id)", {"id": session["user_id"]}).fetchall()[0][0]
-        db.execute("INSERT INTO takes (take, username, dateposted) VALUES(:take, :username, :dateposted)",
-                    {'take': take, 'username': username, 'dateposted':dateposted})
+        db.execute("INSERT INTO takes (take, username, dateposted, drating) VALUES(:take, :username, :dateposted, :drating)",
+                    {'take': take, 'username': username, 'dateposted':dateposted, 'drating':"Lukewarm"})
         db.commit()
         return redirect("/profile")
     else:
@@ -259,17 +258,27 @@ def bs():
     blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Sports"})
     return render_template("blogsDisplay.html", blogs=blogs, type="Sports")
 
-@app.route("/bf", methods=["GET"])
-def bf():
-    blogs = db.execute("SELECT * FROM blogs WHERE typeb = (:type)", {"type": "Featured"})
-    return render_template("blogsDisplay.html", blogs=blogs, type="Featured")
-
 
 @app.route("/takes/<num>", methods=["GET", "POST"])
 def takes(num):
     if request.method == "POST":
         add = request.form.get("rate")
-        db.execute("UPDATE takes SET rating=rating+(:add) WHERE id = (:id)", {"id": num, "add":add})
+        new_average = db.execute("SELECT rating FROM takes WHERE id = (:id)", {"id": num}).fetchall()[0][0]
+        num_ratings = db.execute("SELECT ratings FROM takes WHERE id = (:id)", {"id": num}).fetchall()[0][0]
+        new_average = ((new_average * num_ratings) + int(add)) / (num_ratings + 1)
+        db.execute("UPDATE takes SET rating=(:new_average) WHERE id = (:id)", {"id": num, "new_average":new_average})
+        db.execute("UPDATE takes SET ratings=ratings+1 WHERE id = (:id)", {"id": num})
+        if new_average == 1:
+            r = "Freezing Cold"
+        if new_average == 2:
+            r = "Cool"
+        if new_average == 3:
+            r = "Lukewarm"
+        if new_average == 4:
+            r = "Hot"
+        if new_average == 5:
+            r = "Scalding"
+        db.execute("UPDATE takes SET drating=(:r) WHERE id = (:id)", {"r": r, "id": num})
         db.commit()
         return redirect("/takesG")
     else:

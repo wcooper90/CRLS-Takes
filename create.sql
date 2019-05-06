@@ -11,7 +11,9 @@ CREATE TABLE takes (
   username VARCHAR NOT NULL,
   datePosted DATE,
   id SERIAL PRIMARY KEY,
-  rating INTEGER DEFAULT 3
+  rating FLOAT DEFAULT 3.0,
+  ratings INTEGER DEFAULT 1,
+  drating VARCHAR NOT NULL
 );
 
 
